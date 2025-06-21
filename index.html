@@ -1,73 +1,147 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My YouTube Channel</title>
+  <title>YouTube Clone</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
+      font-family: Arial, sans-serif;
       background-color: #f9f9f9;
     }
+
+    /* Navbar */
     header {
-      background-color: #FF0000;
+      background-color: #202020;
       color: white;
-      padding: 1rem;
-      text-align: center;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .search-bar input {
+      padding: 7px;
+      width: 300px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    /* Video Grid */
     .video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       padding: 20px;
     }
+
     .video-card {
-      background-color: white;
+      background: white;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
       overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    .video-card iframe {
+
+    .video-card:hover {
+      transform: scale(1.02);
+    }
+
+    .video-card img {
       width: 100%;
-      height: 200px;
+      height: auto;
     }
-    .video-title {
+
+    .video-info {
       padding: 10px;
+    }
+
+    .video-info h3 {
+      margin: 0;
       font-size: 16px;
-      font-weight: bold;
+    }
+
+    .video-info p {
+      margin: 4px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal iframe {
+      width: 80vw;
+      height: 45vw;
+      max-width: 900px;
+      max-height: 500px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .search-bar input {
+        width: 180px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Navigation -->
   <header>
-    <h1>My YouTube Videos</h1>
+    <h1>MyTube</h1>
+    <div class="search-bar">
+      <input type="text" placeholder="Search videos..." />
+    </div>
   </header>
 
+  <!-- Video Grid -->
   <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-              frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
-      <div class="video-title">My First Video</div>
+    <div class="video-card" onclick="openVideo('dQw4w9WgXcQ')">
+      <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="Thumbnail">
+      <div class="video-info">
+        <h3>Never Gonna Give You Up</h3>
+        <p>Rick Astley • 1B views • 10 years ago</p>
+      </div>
     </div>
 
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" 
-              frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
-      <div class="video-title">Cool Tech Tutorial</div>
+    <div class="video-card" onclick="openVideo('3JZ_D3ELwOQ')">
+      <img src="https://img.youtube.com/vi/3JZ_D3ELwOQ/hqdefault.jpg" alt="Thumbnail">
+      <div class="video-info">
+        <h3>Alan Walker - Faded</h3>
+        <p>Alan Walker • 3.5B views • 8 years ago</p>
+      </div>
     </div>
 
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/lTTajzrSkCw" 
-              frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen></iframe>
-      <div class="video-title">Music Video</div>
-    </div>
-  </div>
-
-</body>
-</html>
+    <div class="video-card" onclick="openVideo('kJQP7kiw5Fk')">
+      <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="Thumbnail">
+      <div class="video-info">
+        <h3>Luis Fonsi - Despacito ft. Daddy Yankee</h3>
+        <p>Luis Fonsi • 7.7B views • 5 years ago</p>
+      </div>
